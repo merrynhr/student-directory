@@ -20,7 +20,8 @@ end
 
 def print(students)
   students.each_with_index do |student, index|
-    if students[index][:name][0].downcase == "m"
+    # if students[index][:name][0].downcase == "m"
+    if students[index][:name].length < 12
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
