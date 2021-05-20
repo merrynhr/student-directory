@@ -1,71 +1,75 @@
-# Let's put all students into an array
-students = [
-    {name: "Dr. Hannibal Lecter", cohort: :november},
-    {name: "Darth Vader", cohort: :november},
-    {name: "Nurse Ratched", cohort: :november},
-    {name: "Micheal Corleone", cohort: :november},
-    {name: "Alex DeLarge", cohort: :november},
-    {name: "The Wicked Witch of the West", cohort: :november},
-    {name: "Terminator", cohort: :november},
-    {name: "Freddy Krueger", cohort: :november},
-    {name: "The Joker", cohort: :november},
-    {name: "Joffrey Baratheon", cohort: :november},
-    {name: "Norman Bates", cohort: :november}
-]
 # header method
 def print_header
-puts "The students of Villains Academy".center(50)
-puts "------------".center(50)
-end
-
-def print(students)
-  index = 0
-  until index == students.length  
-  # students.each_with_index do |student, index|
-    # if students[index][:name][0].downcase == "m"
-    # if students[index][:name].length < 12
-      puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
-      index += 1
+    puts "The students of Villains Academy".center(50)
+    puts "------------".center(50)
+  end
+   
+  def print(students)
+    # index = 0
+    # until index == students.length
+    # students.each_with_index do |student, index|
+    #   if students[index][:name][0].downcase == "m"
+    #   if students[index][:name].length < 12
+    #     puts "#{index +1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
+    #     index += 1
+    #   end  
+    list_by_cohort = {}
+    students.map do |student|
+      cohort = student[:cohort]
+      name = student[:name]
+      if list_by_cohort[cohort] == nil
+         list_by_cohort[cohort] = [name]
+      else 
+        list_by_cohort[cohort].push(name)
+      end
+    end 
+    list_by_cohort.map do |cohort, name|
+      puts "#{cohort} cohort"
+      puts name
+      puts "\n"
     end
-
-end
-def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
-end
-
-def input_students
+  end
+  
+  def print_footer(students)
+   puts "Overall, we have #{students.count} great students"
+  end
+   
+  def input_students
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
     # create an empty array
     students = []
-    # get the first name
-    name = gets.chomp
-    # while the name is not empty, repeat this code
-    puts "Enter cohort"
-    cohort = gets.chomp
-    if cohort == ""
-        cohort = :Unknown
-    else
-        cohort = cohort.to_sym
-    end
-    puts "Enter nickname"
-    nickname = gets.chomp
-    puts "Enter student hobbies"
-    hobbies = gets.chomp
+    name = "IHopeNoBodyTypesThis"
     while !name.empty? do
-        # add the student hash to the array
-        students << {name: name, cohort: cohort, nickname: nickname, hobbies: hobbies}
-        puts "Now we have #{students.count} students"
-        # get another name from the user
-        name = gets.chomp 
-    end
-    # return the array of students
+      # get the first name
+      name = gets.chomp
+      if name == ""
+        break
+      end
+      puts "Enter cohort"
+      cohort = gets.chomp
+      if cohort == ""
+        cohort = :Unknown
+      else 
+        cohort = cohort.to_sym
+      end
+      puts "Enter nickname"
+      nickname = gets.chomp
+      puts "Enter students hobbies"
+      hobbies = gets.chomp
+      # while the name is not empty, repeat this code
+      # add the student hash to the array
+      students << {name: name, cohort: cohort, nickname: nickname, hobbies: hobbies}
+      puts "Now we have #{students.count} students"
+      # get another name from the user
+      puts "Enter another name"
+      end
+      # return the array of students
     students
-end
-
-students = input_students
-print_header
-print(students)
-print_footer(students)
-
+  end
+   
+  students = input_students
+  print_header
+  print(students)
+  print_footer(students)
 
