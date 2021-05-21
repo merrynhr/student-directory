@@ -23,10 +23,12 @@ def print_header
         list_by_cohort[cohort].push(name)
       end
     end 
-    list_by_cohort.map do |cohort, name|
-      puts "#{cohort} cohort"
-      puts name
-      puts "\n"
+    if students.length > 0 
+      list_by_cohort.map do |cohort, name|
+        puts "#{cohort} cohort"
+        puts name
+        puts "\n"
+      end
     end
   end
   
@@ -71,11 +73,37 @@ def print_header
       # return the array of students
     students
   end
-   
-  students = input_students
-  if students.length > 0
-    print_header
-    print(students)
-    print_footer(students)
+  def interactive_menu
+    students = []
+    loop do
+      puts "1. Input the students"
+      puts "2. Show the students"
+      puts "9. Exit"
+      selection = gets.chomp
+      case selection
+      when "1"
+        students = input_students
+      when "2"
+        print_header
+        print(students)
+        print_footer(students)
+      when "9"
+        print_header
+        print(students)
+        print_footer(students)
+      when "9"
+        exit
+      else 
+        puts "I don't know what you meant, please try again"
+      end
+    end
   end
-
+  
+  interactive_menu
+  # students = input_students
+  # if students.length > 0
+  #   print_header
+  #   print(students)
+  #   print_footer(students)
+  # end
+  
